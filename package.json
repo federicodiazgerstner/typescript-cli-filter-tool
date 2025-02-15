@@ -1,0 +1,27 @@
+{
+  "name": "typescript-cli-filter-tool",
+  "version": "1.0.0",
+  "description": "A CLI Interface for filtering out Property records.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federicodiazgerstner/typescript-cli-filter-tool.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/federicodiazgerstner/typescript-cli-filter-tool/issues"
+  },
+  "homepage": "https://github.com/federicodiazgerstner/typescript-cli-filter-tool#readme",
+  "dependencies": {
+    "@types/node": "^22.13.4",
+    "commander": "^13.1.0",
+    "inquirer": "^12.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
