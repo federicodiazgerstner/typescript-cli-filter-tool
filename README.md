@@ -62,19 +62,19 @@ ts-node src/index.ts [options]
 #### Find properties with a pool and at least 3 rooms:
 
 ```sh
-node src/index.ts --rooms 3 --amenities pool
+ts-node src/index.ts --rooms 3 --amenities pool
 ```
 
 #### Find properties under $500,000 with high lighting and a garage:
 
 ```sh
-node src/index.ts --maxPrice 500000 --lighting high --amenities garage
+ts-node src/index.ts --maxPrice 500000 --lighting high --amenities garage
 ```
 
 #### Find properties within 15 km of a given location:
 
 ```sh
-node src/index.ts --location 40.7128,-74.006,15
+ts-node src/index.ts --location 40.7128,-74.006,15
 ```
 
 ## Sample Data Source (`properties.json`)
