@@ -1,0 +1,23 @@
+[
+    {
+      "squareFootage": 1500,
+      "lighting": "high",
+      "price": 300000,
+      "rooms": 3,
+      "bathrooms": 2,
+      "location": [40.7128, -74.006],
+      "description": "Beautiful house with a pool and garage.",
+      "amenities": { "yard": true, "garage": true, "pool": true }
+    },
+    {
+      "squareFootage": 900,
+      "lighting": "medium",
+      "price": 200000,
+      "rooms": 2,
+      "bathrooms": 1,
+      "location": [34.0522, -118.2437],
+      "description": "Cozy apartment near downtown.",
+      "amenities": { "yard": false, "garage": false, "pool": false }
+    }
+  ]
+  

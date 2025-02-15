@@ -20,6 +20,7 @@
   "dependencies": {
     "@types/node": "^22.13.4",
     "commander": "^13.1.0",
+    "haversine-distance": "^1.2.3",
     "inquirer": "^12.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"

@@ -15,7 +15,7 @@ The **Typescript CLI Filter Tool** is a command-line tool built with TypeScript 
 
 ### Prerequisites
 
-Ensure you have **Node.js** installed. If not, download and install it from [Node.js official website](https://nodejs.org/).
+Ensure you have **Node.js** installed. If not, download and install it from [Node.js official website](https://nodejs.org/). You have to also install **ts-node** globally. You can run `npm install -g ts-node`.
 
 ### Setup
 
@@ -39,12 +39,43 @@ Ensure you have **Node.js** installed. If not, download and install it from [Nod
 Run the CLI with including any filtering options:
 
 ```sh
-node src/index.ts [options]
+ts-node src/index.ts [options]
 ```
 
 ### Options
 
-//To be completed.
+| Option                             | Description                                         | Example Usage                   |
+| ---------------------------------- | --------------------------------------------------- | ------------------------------- |
+| `--minSqft <number>`               | Minimum square footage                              | `--minSqft 1000`                |
+| `--maxSqft <number>`               | Maximum square footage                              | `--maxSqft 3000`                |
+| `--lighting <type>`                | Lighting condition (`low`, `medium`, `high`)        | `--lighting high`               |
+| `--minPrice <number>`              | Minimum price                                       | `--minPrice 200000`             |
+| `--maxPrice <number>`              | Maximum price                                       | `--maxPrice 500000`             |
+| `--rooms <number>`                 | Exact number of rooms                               | `--rooms 3`                     |
+| `--bathrooms <number>`             | Exact number of bathrooms                           | `--bathrooms 2`                 |
+| `--includes <words>`               | Description must contain certain words              | `--includes pool,garden`        |
+| `--amenities <list>`               | Required amenities                                  | `--amenities garage,pool`       |
+| `--location <lat,lon,maxDistance>` | Filter properties within a distance from a location | `--location 40.7128,-74.006,10` |
+
+### Example Commands
+
+#### Find properties with a pool and at least 3 rooms:
+
+```sh
+node src/index.ts --rooms 3 --amenities pool
+```
+
+#### Find properties under $500,000 with high lighting and a garage:
+
+```sh
+node src/index.ts --maxPrice 500000 --lighting high --amenities garage
+```
+
+#### Find properties within 15 km of a given location:
+
+```sh
+node src/index.ts --location 40.7128,-74.006,15
+```
 
 ## Sample Data Source (`properties.json`)
 
