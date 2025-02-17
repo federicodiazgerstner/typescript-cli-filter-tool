@@ -46,7 +46,7 @@ Then, follow the instructions with the desired filters
 
 ## Sample Data Source (`properties.json`)
 
-Make sure to have a `properties.json` file in the root directory with sample property data:
+Make sure to have a `properties.json` file in the root directory with sample property data (or feel free to use the current one in the repo):
 
 ```json
 [
