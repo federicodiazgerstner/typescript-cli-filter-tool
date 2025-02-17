@@ -6,8 +6,8 @@
     "rooms": 3,
     "bathrooms": 2,
     "location": [40.7128, -74.0060],
-    "description": "Beautiful house with a pool and garage.",
-    "amenities": { "yard": true, "garage": true, "pool": true }
+    "description": "Beautiful house with a pool, garage, and gym.",
+    "amenities": { "yard": true, "garage": true, "pool": true, "gym": true, "fireplace": false }
   },
   {
     "squareFootage": 2000,
@@ -16,8 +16,8 @@
     "rooms": 4,
     "bathrooms": 3,
     "location": [34.0522, -118.2437],
-    "description": "Spacious home with a large yard and stunning views.",
-    "amenities": { "yard": true, "garage": true, "pool": false }
+    "description": "Spacious home with a large yard and sauna.",
+    "amenities": { "yard": true, "garage": true, "sauna": true, "securitySystem": true, "pool": false }
   },
   {
     "squareFootage": 1200,
@@ -26,8 +26,8 @@
     "rooms": 2,
     "bathrooms": 1,
     "location": [41.8781, -87.6298],
-    "description": "Cozy apartment in the heart of the city.",
-    "amenities": { "yard": false, "garage": false, "pool": false }
+    "description": "Cozy apartment in the heart of the city with a balcony.",
+    "amenities": { "yard": false, "garage": false, "pool": false, "balcony": true, "gym": true }
   },
   {
     "squareFootage": 2500,
@@ -36,8 +36,8 @@
     "rooms": 5,
     "bathrooms": 4,
     "location": [29.7604, -95.3698],
-    "description": "Luxury villa with private pool and garden.",
-    "amenities": { "yard": true, "garage": true, "pool": true }
+    "description": "Luxury villa with a private pool and home theater.",
+    "amenities": { "yard": true, "garage": true, "pool": true, "homeTheater": true, "sauna": false }
   },
   {
     "squareFootage": 900,
@@ -46,8 +46,8 @@
     "rooms": 1,
     "bathrooms": 1,
     "location": [47.6062, -122.3321],
-    "description": "Small but modern apartment in downtown.",
-    "amenities": { "yard": false, "garage": false, "pool": false }
+    "description": "Small but modern apartment with smart home features.",
+    "amenities": { "yard": false, "garage": false, "pool": false, "smartHome": true, "securitySystem": true }
   },
   {
     "squareFootage": 1800,
@@ -56,8 +56,8 @@
     "rooms": 3,
     "bathrooms": 2,
     "location": [39.9526, -75.1652],
-    "description": "Townhouse with a backyard and two-car garage.",
-    "amenities": { "yard": true, "garage": true, "pool": false }
+    "description": "Townhouse with a backyard and an outdoor kitchen.",
+    "amenities": { "yard": true, "garage": true, "outdoorKitchen": true, "fireplace": true, "pool": false }
   },
   {
     "squareFootage": 3000,
@@ -66,8 +66,8 @@
     "rooms": 6,
     "bathrooms": 5,
     "location": [25.7617, -80.1918],
-    "description": "Oceanfront mansion with a large pool.",
-    "amenities": { "yard": true, "garage": true, "pool": true }
+    "description": "Oceanfront mansion with a large pool and an elevator.",
+    "amenities": { "yard": true, "garage": true, "pool": true, "elevator": true, "smartHome": true }
   },
   {
     "squareFootage": 1400,
@@ -76,8 +76,8 @@
     "rooms": 2,
     "bathrooms": 2,
     "location": [33.4484, -112.0740],
-    "description": "Desert-style home with a private patio.",
-    "amenities": { "yard": true, "garage": false, "pool": false }
+    "description": "Desert-style home with a private patio and a fireplace.",
+    "amenities": { "yard": true, "garage": false, "pool": false, "fireplace": true, "securitySystem": true }
   },
   {
     "squareFootage": 2200,
@@ -86,57 +86,7 @@
     "rooms": 4,
     "bathrooms": 3,
     "location": [32.7157, -117.1611],
-    "description": "Bright and airy home with an open-concept design.",
-    "amenities": { "yard": true, "garage": true, "pool": false }
-  },
-  {
-    "squareFootage": 1000,
-    "lighting": "low",
-    "price": 160000,
-    "rooms": 2,
-    "bathrooms": 1,
-    "location": [39.7392, -104.9903],
-    "description": "Affordable condo near public transit.",
-    "amenities": { "yard": false, "garage": false, "pool": false }
-  },
-  {
-    "squareFootage": 2800,
-    "lighting": "high",
-    "price": 670000,
-    "rooms": 5,
-    "bathrooms": 4,
-    "location": [37.7749, -122.4194],
-    "description": "Modern home with an amazing rooftop view.",
-    "amenities": { "yard": false, "garage": true, "pool": false }
-  },
-  {
-    "squareFootage": 1600,
-    "lighting": "medium",
-    "price": 320000,
-    "rooms": 3,
-    "bathrooms": 2,
-    "location": [30.2672, -97.7431],
-    "description": "Suburban home with a large backyard.",
-    "amenities": { "yard": true, "garage": true, "pool": false }
-  },
-  {
-    "squareFootage": 1300,
-    "lighting": "low",
-    "price": 210000,
-    "rooms": 2,
-    "bathrooms": 2,
-    "location": [36.1627, -86.7816],
-    "description": "Cozy cottage with a charming garden.",
-    "amenities": { "yard": true, "garage": false, "pool": false }
-  },
-  {
-    "squareFootage": 3100,
-    "lighting": "high",
-    "price": 800000,
-    "rooms": 6,
-    "bathrooms": 5,
-    "location": [38.9072, -77.0369],
-    "description": "Elegant estate with luxurious interiors and a heated pool.",
-    "amenities": { "yard": true, "garage": true, "pool": true }
+    "description": "Bright and airy home with an open-concept design and gym.",
+    "amenities": { "yard": true, "garage": true, "gym": true, "balcony": false, "pool": false }
   }
 ]

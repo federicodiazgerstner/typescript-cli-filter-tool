@@ -3,12 +3,10 @@ import { filterProperties } from "./utils";
 import { Property, Filter } from "./types";
 import fs from "fs";
 
-// Load properties data
 const properties: Property[] = JSON.parse(
   fs.readFileSync("properties.json", "utf8")
 );
 
-// Function to get user input using interactive prompts
 async function getUserInput(): Promise<Filter> {
   const minSqft = await input({
     message: "Enter minimum square footage (or leave empty):",
@@ -44,15 +42,15 @@ async function getUserInput(): Promise<Filter> {
     message:
       "Enter words to match in description (comma-separated, or leave empty):",
   });
-  const amenities = await checkbox({
-    message: "Select required amenities:",
-    choices: [
-      { name: "Garage", value: "garage" },
-      { name: "Pool", value: "pool" },
-      { name: "Yard", value: "yard" },
-      { name: "None", value: "" },
-    ],
+
+  const amenitiesInput = await input({
+    message:
+      "Enter required amenities (comma-separated, e.g., gym, sauna, pool):",
   });
+
+  const amenities = amenitiesInput
+    ? amenitiesInput.split(",").map((a) => a.trim().toLowerCase())
+    : undefined;
 
   const useLocation = await confirm({
     message: "Do you want to filter by location?",
@@ -81,15 +79,13 @@ async function getUserInput(): Promise<Filter> {
     rooms: rooms ? parseInt(rooms) : undefined,
     bathrooms: bathrooms ? parseInt(bathrooms) : undefined,
     includes: includes ? includes.split(",").map((s) => s.trim()) : undefined,
-    amenities:
-      amenities.length > 0 && amenities[0] !== "" ? amenities : undefined,
+    amenities: amenities,
     location: location
       ? { lat: location[0], lon: location[1], maxDistance: location[2] }
       : undefined,
   };
 }
 
-// Main function
 async function main() {
   console.log(`
  ________________________________________________________
@@ -99,10 +95,8 @@ async function main() {
 `);
   const criteria = await getUserInput();
 
-  // Filter properties
   const results = filterProperties(properties, criteria);
 
-  // Display results
   if (results.length > 0) {
     console.log(
       `\nFound ${results.length} matching properties:\n`,
