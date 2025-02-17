@@ -92,6 +92,7 @@ async function main() {
 |                                                        |
 | Welcome to the Property Filter CLI Tool for HomeVision |
 |________________________________________________________|
+
 `);
   const criteria = await getUserInput();
 
