@@ -1,47 +1,116 @@
-import { Command } from "commander";
+import { input, select, checkbox, confirm } from "@inquirer/prompts";
 import { filterProperties } from "./utils";
-import { Property, FilterCriteria } from "./types";
-import * as fs from "fs";
+import { Property, Filter } from "./types";
+import fs from "fs";
 
-const program = new Command();
-
+// Load properties data
 const properties: Property[] = JSON.parse(
   fs.readFileSync("properties.json", "utf8")
 );
 
-program
-  .version("1.0.0")
-  .description("CLI to filter properties based on various criteria")
-  .option("--minSqft <number>", "Minimum square footage", parseFloat)
-  .option("--maxSqft <number>", "Maximum square footage", parseFloat)
-  .option("--lighting <type>", "Lighting (low, medium, high)")
-  .option("--minPrice <number>", "Minimum price", parseFloat)
-  .option("--maxPrice <number>", "Maximum price", parseFloat)
-  .option("--rooms <number>", "Exact number of rooms", parseInt)
-  .option("--bathrooms <number>", "Exact number of bathrooms", parseInt)
-  .option(
-    "--includes <words>",
-    "Words that must be in the description, comma-separated"
-  )
-  .option("--amenities <list>", "Amenities required (e.g., garage,pool)")
-  .option("--location <lat,lon,maxDistance>", "Filter by distance", (value) => {
-    const [lat, lon, maxDistance] = value.split(",").map(parseFloat);
-    return { lat, lon, maxDistance };
-  })
-  .action((options) => {
-    const criteria: FilterCriteria = {
-      squareFootage: { min: options.minSqft, max: options.maxSqft },
-      lighting: options.lighting,
-      price: { min: options.minPrice, max: options.maxPrice },
-      rooms: options.rooms,
-      bathrooms: options.bathrooms,
-      includes: options.includes?.split(","),
-      amenities: options.amenities?.split(","),
-      location: options.location,
-    };
-
-    const results = filterProperties(properties, criteria);
-    console.log(JSON.stringify(results, null, 2));
+// Function to get user input using interactive prompts
+async function getUserInput(): Promise<Filter> {
+  const minSqft = await input({
+    message: "Enter minimum square footage (or leave empty):",
+  });
+  const maxSqft = await input({
+    message: "Enter maximum square footage (or leave empty):",
   });
 
-program.parse(process.argv);
+  const lighting = await select({
+    message: "Select lighting condition:",
+    choices: [
+      { name: "Low", value: "low" },
+      { name: "Medium", value: "medium" },
+      { name: "High", value: "high" },
+      { name: "Skip", value: "" },
+    ],
+  });
+
+  const minPrice = await input({
+    message: "Enter minimum price (or leave empty):",
+  });
+  const maxPrice = await input({
+    message: "Enter maximum price (or leave empty):",
+  });
+  const rooms = await input({
+    message: "Enter number of rooms (or leave empty):",
+  });
+  const bathrooms = await input({
+    message: "Enter number of bathrooms (or leave empty):",
+  });
+
+  const includes = await input({
+    message:
+      "Enter words to match in description (comma-separated, or leave empty):",
+  });
+  const amenities = await checkbox({
+    message: "Select required amenities:",
+    choices: [
+      { name: "Garage", value: "garage" },
+      { name: "Pool", value: "pool" },
+      { name: "Yard", value: "yard" },
+      { name: "None", value: "" },
+    ],
+  });
+
+  const useLocation = await confirm({
+    message: "Do you want to filter by location?",
+    default: false,
+  });
+  let location: [number, number, number] | undefined = undefined;
+  if (useLocation) {
+    const lat = await input({ message: "Enter latitude:" });
+    const lon = await input({ message: "Enter longitude:" });
+    const maxDist = await input({ message: "Enter max distance in km:" });
+
+    location = [parseFloat(lat), parseFloat(lon), parseFloat(maxDist)];
+  }
+
+  return {
+    squareFootage:
+      minSqft || maxSqft
+        ? { min: parseInt(minSqft), max: parseInt(maxSqft) }
+        : { min: undefined, max: undefined },
+    lighting:
+      lighting === "" ? undefined : (lighting as "low" | "medium" | "high"),
+    price:
+      minPrice || maxPrice
+        ? { min: parseFloat(minPrice), max: parseFloat(maxPrice) }
+        : { min: undefined, max: undefined },
+    rooms: rooms ? parseInt(rooms) : undefined,
+    bathrooms: bathrooms ? parseInt(bathrooms) : undefined,
+    includes: includes ? includes.split(",").map((s) => s.trim()) : undefined,
+    amenities:
+      amenities.length > 0 && amenities[0] !== "" ? amenities : undefined,
+    location: location
+      ? { lat: location[0], lon: location[1], maxDistance: location[2] }
+      : undefined,
+  };
+}
+
+// Main function
+async function main() {
+  console.log(`
+ ________________________________________________________
+|                                                        |
+| Welcome to the Property Filter CLI Tool for HomeVision |
+|________________________________________________________|
+`);
+  const criteria = await getUserInput();
+
+  // Filter properties
+  const results = filterProperties(properties, criteria);
+
+  // Display results
+  if (results.length > 0) {
+    console.log(
+      `\nFound ${results.length} matching properties:\n`,
+      JSON.stringify(results, null, 2)
+    );
+  } else {
+    console.log("\nNo matching properties found.");
+  }
+}
+
+main();

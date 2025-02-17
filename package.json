@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/federicodiazgerstner/typescript-cli-filter-tool#readme",
   "dependencies": {
+    "@inquirer/prompts": "^7.3.2",
     "@types/node": "^22.13.4",
     "commander": "^13.1.0",
     "haversine-distance": "^1.2.3",

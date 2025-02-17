@@ -9,13 +9,13 @@ export type Property = {
   amenities: Record<string, boolean>;
 };
 
-export type FilterCriteria = {
+export type Filter = {
   squareFootage?: { min?: number; max?: number };
   lighting?: "low" | "medium" | "high";
   price?: { min?: number; max?: number };
   rooms?: number;
   bathrooms?: number;
-  includes?: string[]; // Must include words in description
-  amenities?: string[]; // Must have these amenities
+  includes?: string[];
+  amenities?: string[];
   location?: { lat: number; lon: number; maxDistance: number };
 };

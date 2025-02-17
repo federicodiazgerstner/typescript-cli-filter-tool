@@ -1,9 +1,9 @@
-import { FilterCriteria, Property } from "./types";
+import { Filter, Property } from "./types";
 import haversineDistance from "haversine-distance";
 
 export function filterProperties(
   properties: Property[],
-  criteria: FilterCriteria
+  criteria: Filter
 ): Property[] {
   return properties.filter((property) => {
     if (criteria.squareFootage) {
