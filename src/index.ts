@@ -1,4 +1,4 @@
-import { input, select, checkbox, confirm } from "@inquirer/prompts";
+import { input, select, checkbox, confirm, number } from "@inquirer/prompts";
 import { filterProperties } from "./utils";
 import { Property, Filter } from "./types";
 import fs from "fs";
@@ -8,10 +8,10 @@ const properties: Property[] = JSON.parse(
 );
 
 async function getUserInput(): Promise<Filter> {
-  const minSqft = await input({
+  const minSqft = await number({
     message: "Enter minimum square footage (or leave empty):",
   });
-  const maxSqft = await input({
+  const maxSqft = await number({
     message: "Enter maximum square footage (or leave empty):",
   });
 
@@ -25,16 +25,16 @@ async function getUserInput(): Promise<Filter> {
     ],
   });
 
-  const minPrice = await input({
+  const minPrice = await number({
     message: "Enter minimum price (or leave empty):",
   });
-  const maxPrice = await input({
+  const maxPrice = await number({
     message: "Enter maximum price (or leave empty):",
   });
-  const rooms = await input({
+  const rooms = await number({
     message: "Enter number of rooms (or leave empty):",
   });
-  const bathrooms = await input({
+  const bathrooms = await number({
     message: "Enter number of bathrooms (or leave empty):",
   });
 
@@ -66,18 +66,12 @@ async function getUserInput(): Promise<Filter> {
   }
 
   return {
-    squareFootage:
-      minSqft || maxSqft
-        ? { min: parseInt(minSqft), max: parseInt(maxSqft) }
-        : { min: undefined, max: undefined },
+    squareFootage: { min: minSqft, max: maxSqft },
     lighting:
       lighting === "" ? undefined : (lighting as "low" | "medium" | "high"),
-    price:
-      minPrice || maxPrice
-        ? { min: parseFloat(minPrice), max: parseFloat(maxPrice) }
-        : { min: undefined, max: undefined },
-    rooms: rooms ? parseInt(rooms) : undefined,
-    bathrooms: bathrooms ? parseInt(bathrooms) : undefined,
+    price: { min: minPrice, max: maxPrice },
+    rooms: rooms ? rooms : undefined,
+    bathrooms: bathrooms ? bathrooms : undefined,
     includes: includes ? includes.split(",").map((s) => s.trim()) : undefined,
     amenities: amenities,
     location: location
