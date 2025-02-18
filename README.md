@@ -36,13 +36,11 @@ Ensure you have **Node.js** installed. If not, download and install it from [Nod
 
 ### Command Structure
 
-Run the CLI with including any filtering options:
+Run the CLI and fill the inputs with the desired filter criteria:
 
 ```sh
-ts-node src/index.ts [options]
+ts-node src/index.ts
 ```
-
-Then, follow the instructions with the desired filters
 
 ## Sample Data Source (`properties.json`)
 
